@@ -30,13 +30,11 @@ df = pd.read_csv('ivp-german-data.csv', delimiter=',',
 #a Data Service will be used. For more information please run help(dsdbc)
 ssid = "<SUBSYSTEM_ID_OF_LOCAL_DATA_SERVICE_SERVER>"
 
-#Replace ps_dataset with the name of the empty physical sequential dataset
-ps_dataset = "<NAME_OF_PHYSICAL_SEQUENTIAL_DATASET>"
 conn = dsdbc.connect(ssid=ssid)
 cursor = conn.cursor()
 for index, row in df.iterrows():
     cursor.execute(
-      "insert into " + ps_dataset + " values({0},'{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}',{11},'{12}',{13},'{14}','{15}',{16},'{17}',{18},'{19}','{20}',{21})".format(
+      "insert into CREDIT_DATA values({0},'{1}',{2},'{3}','{4}',{5},'{6}','{7}',{8},'{9}','{10}',{11},'{12}',{13},'{14}','{15}',{16},'{17}',{18},'{19}','{20}',{21})".format(
       index,
       row[0],
       row[1],
