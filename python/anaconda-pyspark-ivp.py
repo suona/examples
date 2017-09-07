@@ -17,7 +17,7 @@ import pandas
 helpText = \
     '''
     Usage:
-        spark-submit izodaIVP.py [mdsURL] [user] [password]
+        spark-submit anaconda-pyspark-ivp.py [mdsURL] [user] [password]
     '''
 
 if __name__ == "__main__":
