@@ -3,7 +3,7 @@
 # Copyright IBM 2017
 
 # izodaIVP.py
-# Last updated 08/05/2017
+# Last updated 10/12/2017
 #
 # Simple analysis on a VSAM file
 # VSAM file contains Client Retention Demo
@@ -27,9 +27,9 @@ if __name__ == "__main__":
         print(helpText)
         sys.exit(-1)
     else:
-        mdssURL = sys.argv[0]
-        user = sys.argv[1]
-        password = sys.argv[2]
+        mdssURL = sys.argv[1]
+        user = sys.argv[2]
+        password = sys.argv[3]
 
     # Initialize Spark
     spark = SparkSession \
@@ -37,21 +37,12 @@ if __name__ == "__main__":
         .appName("izodaIVP") \
         .config("spark.files.overwrite", "true") \
         .getOrCreate()
-
-    schema = StructType([
-        StructField("CONT_ID", IntegerType()),
-        StructField("GENDER", IntegerType()),
-        StructField("AGE_YEARS", DoubleType()),
-        StructField("HIGHEST_EDU", IntegerType()),
-        StructField("ANNUAL_INVEST", DoubleType()),
-        StructField("ANNUAL_INCOME", IntegerType()),
-        StructField("ACTIVITY_LEVEL", IntegerType()),
-        StructField("CHURN", IntegerType()),
-    ])
+        
 
     # Read MDSS Client Retention VSAM file and place that data into a dataframe
     clientIncomeDF = spark.read \
         .format("jdbc") \
+        .option("driver", "com.rs.jdbc.dv.DvDriver") \
         .option("url", mdssURL) \
         .option("dbtable", "CLIENT_RETN") \
         .option("user", user) \
