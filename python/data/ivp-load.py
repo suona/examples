@@ -1,7 +1,7 @@
 import dsdbc
 import pandas as pd
 
-df = pd.read_csv('ivp-german-data.csv', delimiter=',', 
+df = pd.read_csv('data/german.data', delimiter=' ', 
                             names = ["checkingAccount",
                                      "duration",
                                      "creditHistory",
@@ -29,7 +29,6 @@ df = pd.read_csv('ivp-german-data.csv', delimiter=',',
 #the server group, 'sgrp', or if not provided, the first subsystem with 
 #a Data Service will be used. For more information please run help(dsdbc)
 ssid = "<SUBSYSTEM_ID_OF_LOCAL_DATA_SERVICE_SERVER>"
-
 conn = dsdbc.connect(ssid=ssid)
 cursor = conn.cursor()
 for index, row in df.iterrows():
