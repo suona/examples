@@ -1,0 +1,36 @@
+//jobcard
+//********************************************************************/         
+//*                                                                  */         
+//* Run Python script for SMF PoC - find top SMF record and          */         
+//* then identify user ID and jobname.                               */         
+//*                                                                  */         
+//* Input:                                                           */         
+//* Update the following files:                                      */         
+//* - /u/userid/python/data_file.txt with SMF dataset name            */         
+//* - /u/userid/python/user_info.txt with user credentials            */         
+//* Note: input files are in ASCII.                                  */         
+//*                                                                  */         
+//* Output:                                                          */         
+//* Top 5 SMF record types and display user ID and jobname if        */         
+//* available                                                        */         
+//*                                                                  */         
+//********************************************************************/         
+//STEP1   EXEC  PGM=BPXBATCH,REGION=0M                                          
+//STDOUT  DD  SYSOUT=*                                                          
+//STDERR  DD  SYSOUT=*                                                          
+//STDPARM DD  *                                                                 
+sh export JAVA_HOME=/usr/lpp/java/J8.0_64 &&                                    
+PATH=$JAVA_HOME/bin:$PATH &&                                                    
+PATH=/usr/lpp/IBM/izoda/anaconda/bin &&                                         
+export PYTHON_HOME=/usr/lpp/IBM/izoda/anaconda &&                               
+export PYTHONHOME=$PYTHON_HOME &&                                               
+export PYTHONPATH=$PYTHON_HOME/lib &&                                           
+export LIBPATH=$PYTHON_HOME/lib:$LIBPATH &&                                     
+export FFI_LIB=$PYTHON_HOME/lib/ffi &&                                          
+export MANPATH=$PYTHON_HOME/share/man:$MANPATH &&                               
+export CURL_CA_BUNDLE=$PYTHON_HOME/etc/ssl/cacert.pem &&                        
+export BASH42_PATH=$PYTHONHOME/pkgs/bash-4.2.53-5 &&                            
+export PATH=$BASH42_PATH/bin:$PYTHONHOME/bin:$PATH &&                           
+export STEPLIB=SYS1.SAZKLOAD &&                                                 
+python /u/userid/python/SMF-python-functions.latest.py                           
+//*                                                                             
